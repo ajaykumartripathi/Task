@@ -11,26 +11,31 @@ export class UserTaskComponent implements OnInit {
 
   userForm!: FormGroup;
   taskForm!: FormGroup;
+  // Here Making id For user and Task
   idIncrement: any = 2;
-  taskIdIncrement:any=2;
+  taskIdIncrement: any = 2;
+
   user_id: any
-  task_id:any
-  isTaskEdit:boolean = false;
-  isUserEdit:boolean = false;
+  task_id: any
+
+  isTaskEdit: boolean = false;
+  isUserEdit: boolean = false;
+
+  // making userlist with task
   userList: any = [
     {
       id: 1,
       name: "user1",
       taskList: [
         {
-          id:1,
-          taskname:"task1"
+          id: 1,
+          taskname: "task1"
         },
         {
-          id:2,
-          taskname:"task2"
+          id: 2,
+          taskname: "task2"
         }
-        
+
       ]
     },
     {
@@ -38,21 +43,21 @@ export class UserTaskComponent implements OnInit {
       name: "user2",
       taskList: [
         {
-          id:1,
-          taskname:"task1"
-        },{
-          id:2,
-          taskname:"task2"
+          id: 1,
+          taskname: "task1"
+        }, {
+          id: 2,
+          taskname: "task2"
         },
       ]
     },
   ];
-  taskList: any = [];
 
   constructor() {
 
   }
   ngOnInit(): void {
+    // making form for user and task
     this.userForm = new FormGroup({
       username: new FormControl("")
     });
@@ -61,9 +66,8 @@ export class UserTaskComponent implements OnInit {
       taskName: new FormControl("")
     });
   }
-  // todo = ['Get to work', 'Pick up groceries', 'Go home', 'Fall asleep'];
-
-  // done = ['Get up', 'Brush teeth', 'Take a shower', 'Check e-mail', 'Walk dog'];
+  
+  // this is submit button for user add and edit
   onSubmit() {
     let view = {
       id: 0,
@@ -71,26 +75,23 @@ export class UserTaskComponent implements OnInit {
       taskList: []
     }
     this.idIncrement += 1;
-    if(this.isUserEdit)
-    {
-this.userList.forEach((element: any) => {
-  if(element.id == this.user_id)
-  {
-    element.name = this.userForm.value.username;
-  }
-});
+    if (this.isUserEdit) {
+      this.userList.forEach((element: any) => {
+        if (element.id == this.user_id) {
+          element.name = this.userForm.value.username;
+        }
+      });
     }
-    else
-    {
+    else {
       view.id = this.idIncrement;
       view.name = this.userForm.value.username
       this.userList.push(view)
       this.userForm.reset()
 
     }
-
-    console.log(this.userList)
   }
+
+  // this is the task drag and drop method
   drop(event: CdkDragDrop<string[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(event.container.data, event.previousIndex, event.currentIndex);
@@ -103,93 +104,86 @@ this.userList.forEach((element: any) => {
       );
     }
   }
+
+  // here is task add method
   onAddTask() {
-    this.taskIdIncrement +=1;
-    let task ={
-      id:0,
-      taskname:""
+    this.taskIdIncrement += 1;
+    let task = {
+      id: 0,
+      taskname: ""
     }
-    if(this.isTaskEdit)
-    {
+    if (this.isTaskEdit) {
       this.userList.forEach((element: any) => {
 
         if (element.id == this.user_id) {
           element.taskList.forEach((val: any) => {
-            if(val.id == this.task_id)
-            {
+            if (val.id == this.task_id) {
               console.log(val)
-               val.taskname = this.taskForm.value.taskName;
+              val.taskname = this.taskForm.value.taskName;
             }
           });
         }
-  
+
       });
     }
-    else
-    {
+    else {
       this.userList.forEach((element: any) => {
 
         if (element.id == this.user_id) {
-           task.id = this.taskIdIncrement
-           task.taskname = this.taskForm.value.taskName;
-           element.taskList.push(task);
-        
+          task.id = this.taskIdIncrement
+          task.taskname = this.taskForm.value.taskName;
+          element.taskList.push(task);
+
         }
-  
+
       });
     }
-    
-    console.log(this.taskForm.value)
     this.taskForm.reset()
   }
 
+  // this is the method for getting userid
   OnTaskGetId(id: any) {
     this.user_id = id
     this.isTaskEdit = false
   }
 
-  onDeleteUser(id:any)
-  {
-    this.userList.splice(id,1);
-    // console.log(this.userList)
+  // for delete user
+  onDeleteUser(id: any) {
+    this.userList.splice(id, 1);
   }
 
-
-  OnTaskEdit(userId:any,taskId:any)
-  {
+// setting value for task edit
+  OnTaskEdit(userId: any, taskId: any) {
     this.task_id = taskId;
     this.user_id = userId;
     this.isTaskEdit = true;
-  this.userList.forEach((element: any) => {
-    if(element.id == userId)
-    {
-      element.taskList.forEach((val: any) => {
-        if(val.id == taskId)
-        {
-          this.taskForm.controls['taskName'].setValue(val.taskname)
-        }
-      });
-    }
-  });
+    this.userList.forEach((element: any) => {
+      if (element.id == userId) {
+        element.taskList.forEach((val: any) => {
+          if (val.id == taskId) {
+            this.taskForm.controls['taskName'].setValue(val.taskname)
+          }
+        });
+      }
+    });
   }
 
-  OnuserEdit(userId:any)
-  {
+  // setting value for useredit
+  OnuserEdit(userId: any) {
     this.user_id = userId;
     this.isUserEdit = true;
 
     this.userList.forEach((element: any) => {
 
-      if(element.id == userId)
-      {
+      if (element.id == userId) {
         this.userForm.controls['username'].setValue(element.name)
       }
-      
+
     });
 
   }
-  onUserAdd()
-  {
+  
+  onUserAdd() {
     this.isUserEdit = false
   }
 
