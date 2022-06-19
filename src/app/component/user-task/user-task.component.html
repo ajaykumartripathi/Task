@@ -39,13 +39,14 @@
         </div>
 
         <div cdkDropListGroup class="row mt-4">
-            <ng-container *ngFor="let user of userList; let i=index">
-                <div class="col-auto box ms-2" cdkDropList [cdkDropListData]=user.taskList
+            <!-- user task box -->
+            <ng-container *ngFor="let user of userList; let i=index; trackBy: identify">
+                <div class="col-auto box ms-2 mt-2" cdkDropList [cdkDropListData]=user.taskList
                     (cdkDropListDropped)="drop($event)">
                     <div class="d-flex justify-content-between ">
                         <span class="userinfo" data-bs-toggle="modal" data-bs-target="#example"
                             (click)="OnuserEdit(user.id)">{{user.name}}</span>
-                        <i class="fa fa-minus" aria-hidden="true" data-bs-toggle="modal"
+                        <i class="fa fa-minus" aria-hidden="true" data-bs-toggle="modal" (click)="OnDeleteGetIndex(i)"
                             data-bs-target="#deleteModal"></i>
                         <!-- </button> -->
 
@@ -65,7 +66,7 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
                                             data-bs-dismiss="modal">No</button>
-                                        <button type="button" class="btn btn-primary" (click)="onDeleteUser(i)"
+                                        <button type="button" class="btn btn-primary" (click)="onDeleteUser()"
                                             data-bs-dismiss="modal">yes</button>
                                     </div>
                                 </div>

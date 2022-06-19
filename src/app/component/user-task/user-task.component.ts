@@ -15,8 +15,9 @@ export class UserTaskComponent implements OnInit {
   idIncrement: any = 2;
   taskIdIncrement: any = 2;
 
-  user_id: any
-  task_id: any
+  user_id: any;
+  task_id: any;
+  index_value:any;
 
   isTaskEdit: boolean = false;
   isUserEdit: boolean = false;
@@ -153,8 +154,9 @@ export class UserTaskComponent implements OnInit {
   }
 
   // for delete user
-  onDeleteUser(id: any) {
-    this.userList.splice(id, 1);
+  onDeleteUser() {
+    console.log(this.userList)
+    this.userList.splice(this.index_value,1);
   }
 
 // setting value for task edit
@@ -192,5 +194,14 @@ export class UserTaskComponent implements OnInit {
     this.isUserEdit = false
     this.userForm.reset()
   }
+  identify(index:any) {
+    return index;
+}
+
+OnDeleteGetIndex(inde:any)
+{
+  console.log(inde)
+this.index_value = inde
+}
 
 }
