@@ -133,18 +133,19 @@ export class UserTaskComponent implements OnInit {
           task.id = this.taskIdIncrement
           task.taskname = this.taskForm.value.taskName;
           element.taskList.push(task);
+          this.taskForm.reset()
 
         }
 
       });
     }
-    this.taskForm.reset()
   }
 
   // this is the method for getting userid
   OnTaskGetId(id: any) {
     this.user_id = id
     this.isTaskEdit = false
+    this.taskForm.reset()
   }
 
   // for delete user
@@ -185,6 +186,7 @@ export class UserTaskComponent implements OnInit {
   
   onUserAdd() {
     this.isUserEdit = false
+    this.userForm.reset()
   }
 
 }

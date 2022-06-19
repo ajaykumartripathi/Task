@@ -13,7 +13,10 @@
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                            <h3 class="modal-title" id="exampleModalLabel" *ngIf="!isUserEdit; else edituser">Add User</h3>
+                            <ng-template #edituser>
+                                <h3 class="modal-title" id="exampleModalLabel">Edit User</h3>
+                            </ng-template>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
@@ -52,12 +55,12 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                                        <h3 class="modal-title" id="exampleModalLabel">Delete</h3>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
                                     <div class="modal-body">
-                                        <h5>Sure! Are you want to Delete !</h5>
+                                        <h3>Sure! Are you want to Delete !</h3>
                                     </div>
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary"
@@ -86,7 +89,10 @@
                             <div class="modal-dialog">
                                 <div class="modal-content">
                                     <div class="modal-header">
-                                        <!-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> -->
+                                        <h3 class="modal-title" id="exampleModalLabel" *ngIf="!isTaskEdit; else edittask">Add Task</h3>
+                                        <ng-template #edittask>
+                                            <h3 class="modal-title" id="exampleModalLabel">Edit Task</h3>
+                                        </ng-template>
                                         <button type="button" class="btn-close" data-bs-dismiss="modal"
                                             aria-label="Close"></button>
                                     </div>
