@@ -34,6 +34,10 @@ export class UserTaskComponent implements OnInit {
         {
           id: 2,
           taskname: "task2"
+        },
+        {
+          id: 2,
+          taskname: "task3"
         }
 
       ]
